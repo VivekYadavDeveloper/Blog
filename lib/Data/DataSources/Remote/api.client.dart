@@ -11,7 +11,7 @@ class ApiClient {
 
     final dio = Dio(option);
     try {
-      debugPrint("============ API REQUEST=============");
+      debugPrint("============ API   REQUEST=============");
       debugPrint("API REQUEST :${ApiConstant.mainUrl + ApiEndPoint.tags}");
       var response = await dio.get(ApiEndPoint.tags);
       debugPrint(response.statusCode.toString());
