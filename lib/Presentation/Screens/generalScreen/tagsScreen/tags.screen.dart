@@ -53,7 +53,7 @@ class _TagsScreenState extends State<TagsScreen> {
                     var tagsData = state.data.tags![index];
                     return Card(
                       child: ListTile(
-                        leading: Text("${index + 1}"),
+                        leading: Text(tagsData.id.toString()),
                         title: Text(tagsData.title.toString()),
                         trailing: SizedBox(
                           width: 100.w,
