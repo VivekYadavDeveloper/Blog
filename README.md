@@ -1,4 +1,4 @@
-# bloc_learning
+# Blog App
 
 This is Bloc Based Application In Flutter
 
