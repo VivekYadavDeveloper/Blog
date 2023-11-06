@@ -1,5 +1,4 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_learning/Core/Constant/color.dart';
 import 'package:bloc_learning/Presentation/Router/router.imports.gr.dart';

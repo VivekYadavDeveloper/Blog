@@ -91,7 +91,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 ),
                 20.h.heightBox,
                 QuillToolbar.basic(controller: quillController),
-                Container(
+                SizedBox(
                   height: 500.h,
                   child: QuillEditor.basic(
                       controller: quillController, readOnly: false),

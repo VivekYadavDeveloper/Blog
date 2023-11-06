@@ -3,7 +3,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_learning/Core/Constant/color.dart';
 import 'package:bloc_learning/Core/Constant/strings.dart';
 import 'package:bloc_learning/Data/DataSources/Remote/api.client.dart';
-import 'package:bloc_learning/Presentation/Router/router.imports.gr.dart';
+import 'package:bloc_learning/Data/DataSources/Remote/api.endpoint.urls.dart';
+import 'package:bloc_learning/Data/Repo/tags.repo.dart';
+
 import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/onboard.third.dart';
 import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/onboarding.sec.dart';
 import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/view.model.onboard.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../Router/router.imports.gr.dart';
 import 'widget/onboarding.first.dart';
 
 @RoutePage()
@@ -53,14 +56,9 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     ],
                   ).expand(flex: 1),
                   61.heightBox,
-                  // ElevatedButton(
-                  // onPressed: () =>
-                  // AutoRouter.of(context).push(const AuthScreenRoute()),
-                  // child: const Text("Get Started"),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {});
-                      ApiClient().getTags();
+                      AutoRouter.of(context).push(const AuthScreenRoute());
                     },
                     child: const Text("Get Started"),
                   ),

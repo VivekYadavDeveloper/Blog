@@ -1,7 +1,6 @@
 import 'package:bloc_learning/Core/Constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});

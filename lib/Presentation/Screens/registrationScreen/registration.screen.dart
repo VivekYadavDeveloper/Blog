@@ -1,5 +1,4 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +113,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       child: CheckboxListTile(
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
-                                          title: Text("Remember Me"),
+                                          title: const Text("Remember Me"),
                                           value: false,
                                           onChanged: (value) {}),
                                     ),
