@@ -13,7 +13,7 @@ class Utils {
     }
   }
 
-  static Future<void>    saveToken(String token) async {
+  static Future<void> saveToken(String token) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString("token", token);
   }
