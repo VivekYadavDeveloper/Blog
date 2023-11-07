@@ -7,4 +7,6 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/utils.dart';
+
 part 'splash.dart';

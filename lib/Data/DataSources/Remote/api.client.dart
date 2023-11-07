@@ -17,20 +17,20 @@ class ApiClient {
   }
 
   // Get Request oF Tags
-  Future<Response> getTagsRequest({required String path}) async {
+  Future<Response> getRequest({required String path}) async {
     try {
-      debugPrint("============ API TAGS REQUEST =============");
+      debugPrint("============ API REQUEST =============");
       // log("API REQUEST : =========> ${baseOptions.baseUrl + path}");
       var response = await dio.get(path);
       debugPrint(response.statusCode.toString());
-      debugPrint("============ API TAGS RESPONSE =============");
+      debugPrint("============ API RESPONSE =============");
       log(response.data.toString());
       return response;
     } on DioException catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);
@@ -44,26 +44,28 @@ class ApiClient {
   }
 
   // Post Request oF Tags
-  Future<Response> postTagsRequest({
-    required String path,
-    required dynamic body,
-  }) async {
+  Future<Response> postRequest(
+      {required String path, required dynamic body}) async {
     final option = Options(headers: {
       "Authorization": "Bearer 274|AeKcNkBahdqj78WtcO83R318CO72pDpvK0Tm7EDy"
     });
     try {
-      debugPrint("============ API POST TAGS REQUEST =============");
-      log("API REQUEST : =========> ${baseOptions.baseUrl + path}");
-      var response = await dio.post(path, data: body);
+      debugPrint("============ API POST REQUEST =============");
+      // log("API REQUEST URLs : =========> ${baseOptions.baseUrl + path}");
+      log("BODY : =========> $body");
+      var response = await dio.post(
+        path,
+        data: body,
+      );
       debugPrint(response.statusCode.toString());
-      debugPrint("============ API POST TAGS RESPONSE =============");
+      debugPrint("============ API POST RESPONSE =============");
       log(response.data.toString());
       return response;
     } on DioException catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);

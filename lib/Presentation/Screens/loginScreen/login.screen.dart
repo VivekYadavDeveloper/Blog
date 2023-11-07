@@ -1,10 +1,14 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_learning/Core/Constant/color.dart';
+import 'package:bloc_learning/Data/Repo/repo.dart';
+import 'package:bloc_learning/Data/ViewModel/login.view.model.dart';
 import 'package:bloc_learning/Presentation/Router/router.imports.gr.dart';
 import 'package:bloc_learning/Presentation/Widgets/custom.textfield.dart';
+import 'package:bloc_learning/utils/validation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -17,21 +21,26 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController userEmailController = TextEditingController();
-  final TextEditingController userPassController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  late LoginViewModel loginViewModel;
 
   @override
   void dispose() {
-    userEmailController.dispose();
-    userPassController.dispose();
+    // userEmailController.dispose();
+    // userPassController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    loginViewModel = LoginViewModel(repository: context.read<Repository>());
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FadedScaleAnimation(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: MyColors.primaryColor,
         body: SafeArea(
           child: LayoutBuilder(builder: (context, BoxConstraints constraints) {
@@ -41,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 Center(
                   child: Text(
-                    "Namashakar",
+                    "Namashkar",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 27.sp,
@@ -70,31 +79,44 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 25.sp,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Form(
-                            key: _formKey,
+                        Form(
+                          key: loginViewModel.formKey,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 SizedBox(height: 25.h),
                                 CustomTextField.customTextField(
-                                  textEditingController: userEmailController,
-                                  hintText: "Email",
-                                  validator: (val) =>
-                                      !RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-                                              .hasMatch(val!)
-                                          ? 'Enter An Email'
-                                          : null,
-                                ),
+                                    textEditingController:
+                                        loginViewModel.emailController,
+                                    hintText: "Email",
+                                    validator: (email) {
+                                      if (email!.isEmpty) {
+                                        return "Email Field Is Empty";
+                                      } else if (!email.isValidEmail) {
+                                        return "Invalid Email";
+                                      }
+                                      return null;
+                                    }),
                                 SizedBox(height: 25.h),
                                 CustomTextField.customTextField(
-                                  textEditingController: userPassController,
-                                  hintText: "Password",
-                                  validator: (val) =>
-                                      val!.isEmpty ? 'Enter a password' : null,
-                                ),
+                                    textEditingController:
+                                        loginViewModel.passwordController,
+                                    hintText: "Password",
+                                    validator: (password) {
+                                      if (password!.isEmpty) {
+                                        return "Password Field Is Empty";
+                                      }
+                                      // else if (password.length < 8) {
+                                      //   return "Password Should be 8 Letter";
+                                      // }
+                                      // else if (!password.isValidPassword) {
+                                      //   return "Invalid Password";
+                                      // }
+                                      return null;
+                                    }),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -116,8 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    AutoRouter.of(context)
-                                        .push(const BottomNavigationBarRoute());
+                                    if (loginViewModel.formKey.currentState!
+                                        .validate()) {
+                                      loginViewModel.login(context);
+                                    }
                                   },
                                   child: const Text("Login"),
                                 ),

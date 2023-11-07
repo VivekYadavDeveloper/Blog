@@ -1,5 +1,6 @@
 import 'package:bloc_learning/Core/Constant/strings.dart';
 import 'package:bloc_learning/Core/Themes/app.themes.dart';
+import 'package:bloc_learning/Data/Repo/auth.repo.dart';
 import 'package:bloc_learning/Data/Repo/tags.repo.dart';
 import 'package:bloc_learning/Presentation/Router/router.imports.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ void main() {
   runApp(RepositoryProvider(
     create: (context) => Repository(
       tagsRepo: TagsRepo(),
+      authRepo: AuthRepo(),
     ),
     child: MyApp(),
   ));

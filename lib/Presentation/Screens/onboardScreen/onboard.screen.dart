@@ -10,6 +10,7 @@ import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/onboard.
 import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/onboarding.sec.dart';
 import 'package:bloc_learning/Presentation/Screens/onboardScreen/widget/view.model.onboard.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -57,7 +58,11 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   ).expand(flex: 1),
                   61.heightBox,
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      // final SharedPreferences prefs =
+                      //     await SharedPreferences.getInstance();
+                      // var token = prefs.getString("token");
+                      // Vx.log(token);
                       AutoRouter.of(context).push(const AuthScreenRoute());
                     },
                     child: const Text("Get Started"),
