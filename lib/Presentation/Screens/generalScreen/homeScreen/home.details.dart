@@ -1,12 +1,19 @@
 import 'package:auto_route/annotations.dart';
-import 'package:bloc_learning/Core/Constant/assets.dart';
+
 import 'package:bloc_learning/Core/Constant/color.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../../../../Data/Models/home.model.dart';
 
 @RoutePage()
 class HomeDetails extends StatefulWidget {
-  const HomeDetails({super.key});
+  final Post post;
+  final String imagePath;
+
+  const HomeDetails({super.key, required this.post, required this.imagePath});
 
   @override
   State<HomeDetails> createState() => _HomeDetailsState();
@@ -18,7 +25,7 @@ class _HomeDetailsState extends State<HomeDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.primaryColor,
-        title: const Text("Learn Web Designing"),
+        title: Text(widget.post.title.toString()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -27,10 +34,16 @@ class _HomeDetailsState extends State<HomeDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Image.asset(MyAssets.assetsImageOnBoarding1),
+                Hero(
+                  tag: Key(widget.post.id.toString()),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.imagePath,
+                    fit: BoxFit.cover,
+                  ).cornerRadius(20),
+                ),
                 SizedBox(height: 15.h),
                 Text(
-                  "Learn Web Designing",
+                  widget.post.title.toString(),
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 25.sp),
                 ),
@@ -38,22 +51,25 @@ class _HomeDetailsState extends State<HomeDetails> {
                   children: <Widget>[
                     const Icon(Icons.remove_red_eye),
                     const SizedBox(width: 5),
-                    const Text("264 Views"),
+                    Text(
+                      "${widget.post.views} Views",
+                    ),
                     const Spacer(),
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.thumb_up_off_alt_outlined,
                             color: Colors.green)),
-                    const Text("0"),
+                    Text(widget.post.like.toString()),
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.thumb_down_off_alt_outlined,
                             color: Colors.red)),
-                    const Text("0"),
+                    Text(widget.post.dislike.toString()),
                   ],
                 ),
-                const Text(
-                    "Web design refers to the design of websites that are displayed on the internet. It usually refers to the user experience aspects of website development rather than software development. Web design used to be focused on designing websites for desktop browsers; however, since the mid-2010s, design for mobile and tablet browsers has become ever-increasingly important.")
+                Text(
+                  widget.post.body.toString(),
+                )
               ],
             );
           }),
