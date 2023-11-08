@@ -9,4 +9,5 @@ class ApiEndPoint {
   /* Auth EndPoint URLs */
 
   static String login = "login";
+  static String logout = "logout";
 }

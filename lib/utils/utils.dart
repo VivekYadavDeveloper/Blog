@@ -7,7 +7,7 @@ class Utils {
     var token = await getToken();
 
     if (token != null) {
-      AutoRouter.of(context).push(const OnBoardScreenRoute());
+      AutoRouter.of(context).push(const BottomNavigationBarRoute());
     } else {
       AutoRouter.of(context).push(const AuthScreenRoute());
     }
@@ -21,5 +21,12 @@ class Utils {
   static Future<String?> getToken() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     return pref.getString("token");
+  }
+
+  static Future<void> removeAllToken() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    // pref.remove("token");
+
+    pref.clear();
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc_learning/Data/DataSources/Remote/api.constant.dart';
+import 'package:bloc_learning/utils/utils.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,13 @@ class ApiClient {
     dio = Dio(baseOptions);
   }
 
-  // Get Request oF Tags
+  /// ****************** GET REQUEST************************
   Future<Response> getRequest({required String path}) async {
     try {
       debugPrint("============ API REQUEST =============");
+
       // log("API REQUEST : =========> ${baseOptions.baseUrl + path}");
+
       var response = await dio.get(path);
       debugPrint(response.statusCode.toString());
       debugPrint("============ API RESPONSE =============");
@@ -29,6 +32,7 @@ class ApiClient {
     } on DioException catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
+
       if (e.response != null) {
         debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
@@ -43,20 +47,17 @@ class ApiClient {
     }
   }
 
-  // Post Request oF Tags
-  Future<Response> postRequest(
-      {required String path, required dynamic body}) async {
-    final option = Options(headers: {
-      "Authorization": "Bearer 274|AeKcNkBahdqj78WtcO83R318CO72pDpvK0Tm7EDy"
-    });
+  /// **************************** POST REQUEST **************************
+  Future<Response> postRequest({required String path, dynamic body}) async {
+    var token = await Utils.getToken();
+    final option = Options(headers: {"Authorization": "Bearer $token"});
     try {
       debugPrint("============ API POST REQUEST =============");
+
       // log("API REQUEST URLs : =========> ${baseOptions.baseUrl + path}");
+
       log("BODY : =========> $body");
-      var response = await dio.post(
-        path,
-        data: body,
-      );
+      var response = await dio.post(path, data: body, options: option);
       debugPrint(response.statusCode.toString());
       debugPrint("============ API POST RESPONSE =============");
       log(response.data.toString());
@@ -64,6 +65,7 @@ class ApiClient {
     } on DioException catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
+
       if (e.response != null) {
         debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());

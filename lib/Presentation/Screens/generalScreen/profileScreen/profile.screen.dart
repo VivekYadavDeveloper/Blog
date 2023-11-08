@@ -1,6 +1,9 @@
 import 'package:bloc_learning/Core/Constant/assets.dart';
 import 'package:bloc_learning/Core/Constant/color.dart';
+import 'package:bloc_learning/Data/Repo/repo.dart';
+import 'package:bloc_learning/Data/ViewModel/profile.view.model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -11,6 +14,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late ProfileViewModel profileViewModel;
+
+  @override
+  void initState() {
+    profileViewModel = ProfileViewModel(repository: context.read<Repository>());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +30,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         automaticallyImplyLeading: false,
         title: const Text("Profile"),
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: const Icon(Icons.logout_rounded))
+          IconButton(
+              onPressed: () => profileViewModel.logout(context),
+              icon: const Icon(Icons.logout_rounded))
         ],
       ),
       body: SingleChildScrollView(
