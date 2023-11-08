@@ -5,6 +5,7 @@ class ApiEndPoint {
   static String posts = "posts";
   static String categories = "categories";
   static String addTags = "add-tags";
+  static String userPosts = "user-posts";
 
   /* Auth EndPoint URLs */
 

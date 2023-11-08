@@ -17,14 +17,22 @@ class ApiClient {
     dio = Dio(baseOptions);
   }
 
+  Options options = Options();
+
   /// ****************** GET REQUEST************************
-  Future<Response> getRequest({required String path}) async {
+  Future<Response> getRequest(
+      {required String path, bool isTokenRequired = false}) async {
+    if (isTokenRequired == true) {
+      var token = await Utils.getToken();
+      options.headers = baseOptions.headers
+        ..addAll({"Authorization": "Bearer $token"});
+    }
     try {
       debugPrint("============ API REQUEST =============");
 
       // log("API REQUEST : =========> ${baseOptions.baseUrl + path}");
 
-      var response = await dio.get(path);
+      var response = await dio.get(path, options: options);
       debugPrint(response.statusCode.toString());
       debugPrint("============ API RESPONSE =============");
       log(response.data.toString());
@@ -63,16 +71,12 @@ class ApiClient {
       log(response.data.toString());
       return response;
     } on DioException catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
-
       if (e.response != null) {
         debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusMessage);
       } else {
-        // Something happened in setting up or sending the request that triggered an Error
         debugPrint(e.requestOptions.toString());
         debugPrint(e.message);
       }
