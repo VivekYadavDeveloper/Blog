@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:velocity_x/velocity_x.dart';
-
 import '../DataSources/Remote/api.client.dart';
 import '../DataSources/Remote/api.endpoint.urls.dart';
 import '../Models/login.model.dart';
-import '../Models/logout.dart';
+import '../Models/logout.model.dart';
 
 class AuthRepo extends ApiClient {
   AuthRepo();
@@ -52,7 +49,7 @@ class AuthRepo extends ApiClient {
 
       if (response.statusCode == 200) {
         final resData = LogoutModel.fromJson(response.data);
-        // Vx.log(response);
+        Vx.log(response.statusCode);
         return resData;
       } else {
         LogoutModel();

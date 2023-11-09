@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Container(
                         height: 400,
                         width: MediaQuery.sizeOf(context).width,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: MyColors.primaryColor,
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(20),
@@ -80,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text(state.data.userDetails!.about.toString(),
                                 textAlign: TextAlign.center),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -89,18 +89,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     children: <Widget>[
                                       Text(state.data.postsCount.toString(),
                                           textAlign: TextAlign.center),
-                                      Text("Posts",
+                                      const Text("Posts",
                                           textAlign: TextAlign.center),
                                     ],
                                   ),
-                                  Column(
+                                  const Column(
                                     children: <Widget>[
                                       Text("0", textAlign: TextAlign.center),
                                       Text("Following",
                                           textAlign: TextAlign.center),
                                     ],
                                   ),
-                                  Column(
+                                  const Column(
                                     children: <Widget>[
                                       Text("0", textAlign: TextAlign.center),
                                       Text("Follower",
@@ -135,7 +135,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Row(
                                     children: <Widget>[
                                       Padding(
-                                        padding: EdgeInsets.only(left: 8.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
                                         child: Text(
                                           userPostData.title.toString(),
                                           textAlign: TextAlign.center,

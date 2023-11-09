@@ -20,8 +20,10 @@ class ApiClient {
   Options options = Options();
 
   /// ****************** GET REQUEST************************
-  Future<Response> getRequest(
-      {required String path, bool isTokenRequired = false}) async {
+  Future<Response> getRequest({
+    required String path,
+    bool isTokenRequired = false,
+  }) async {
     if (isTokenRequired == true) {
       var token = await Utils.getToken();
       options.headers = baseOptions.headers
@@ -56,16 +58,25 @@ class ApiClient {
   }
 
   /// **************************** POST REQUEST **************************
-  Future<Response> postRequest({required String path, dynamic body}) async {
-    var token = await Utils.getToken();
-    final option = Options(headers: {"Authorization": "Bearer $token"});
+  Future<Response> postRequest({
+    required String path,
+    dynamic body,
+    bool isTokenRequired = false,
+  }) async {
+    if (isTokenRequired == true) {
+      var token = await Utils.getToken();
+      options.headers = baseOptions.headers
+        ..addAll({"Authorization": "Bearer $token"});
+    }
+    // var token = await Utils.getToken();
+    // final option = Options(headers: {"Authorization": "Bearer $token"});
     try {
       debugPrint("============ API POST REQUEST =============");
 
       // log("API REQUEST URLs : =========> ${baseOptions.baseUrl + path}");
 
       log("BODY : =========> $body");
-      var response = await dio.post(path, data: body, options: option);
+      var response = await dio.post(path, data: body, options: options);
       debugPrint(response.statusCode.toString());
       debugPrint("============ API POST RESPONSE =============");
       log(response.data.toString());

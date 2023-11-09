@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_learning/Data/Models/tags.model.dart';
+import 'package:bloc_learning/Presentation/Router/router.imports.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +9,7 @@ import '../../../../Core/Constant/color.dart';
 import '../../../../Data/Repo/repo.dart';
 import '../../../../Data/ViewModel/tags.view.model.dart';
 
+@RoutePage()
 class TagsScreen extends StatefulWidget {
   const TagsScreen({super.key});
 
@@ -32,7 +35,10 @@ class _TagsScreenState extends State<TagsScreen> {
         automaticallyImplyLeading: false,
         title: const Text("Tags"),
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          IconButton(
+              onPressed: () =>
+                  AutoRouter.of(context).push(AddTagsScreenRoute()),
+              icon: const Icon(Icons.add)),
         ],
       ),
       body: Padding(
