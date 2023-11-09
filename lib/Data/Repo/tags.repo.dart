@@ -4,6 +4,7 @@ import 'package:bloc_learning/Data/Models/tags.model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../Models/add.tags.model.dart';
+import '../Models/delete.tags.model.dart';
 
 class TagsRepo extends ApiClient {
   TagsRepo();
@@ -53,5 +54,25 @@ class TagsRepo extends ApiClient {
       AddTagsModel();
     }
     return AddTagsModel();
+  }
+
+  ///*************************** DELETE TAGS ******************
+  Future<DeleteModel> deleteTags(String id) async {
+    try {
+      final response = await postRequest(
+          path: "${ApiEndPoint.deleteTags}/${id}", isTokenRequired: true);
+
+      if (response.statusCode == 200) {
+        final resData = DeleteModel.fromJson(response.data);
+        Vx.log(response);
+        return resData;
+      } else {
+        DeleteModel();
+      }
+    } on Exception catch (e) {
+      Vx.log(e);
+      DeleteModel();
+    }
+    return DeleteModel();
   }
 }

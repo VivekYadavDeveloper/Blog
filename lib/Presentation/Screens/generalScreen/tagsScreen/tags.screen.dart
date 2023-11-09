@@ -36,8 +36,7 @@ class _TagsScreenState extends State<TagsScreen> {
         title: const Text("Tags"),
         actions: <Widget>[
           IconButton(
-              onPressed: () =>
-                  AutoRouter.of(context).push(AddTagsScreenRoute()),
+              onPressed: () => tagsViewModel.gotoAddTags(context),
               icon: const Icon(Icons.add)),
         ],
       ),
@@ -69,7 +68,8 @@ class _TagsScreenState extends State<TagsScreen> {
                                 icon: const Icon(Icons.edit_note),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () => tagsViewModel.deleteTags(
+                                    tagsData.id.toString(), context, index),
                                 icon: const Icon(Icons.delete_sweep_rounded),
                               ),
                             ],

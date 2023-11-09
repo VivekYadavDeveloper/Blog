@@ -1,16 +1,15 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:bloc_learning/Data/Models/tags.model.dart';
 import 'package:bloc_learning/Data/Repo/repo.dart';
 import 'package:bloc_learning/Data/ViewModel/add.tags.view.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../Core/Constant/color.dart';
-
 import '../../../Widgets/custom.textfield.dart';
 
-@RoutePage()
+@RoutePage<TagsModel>()
 class AddTagsScreen extends StatefulWidget {
   const AddTagsScreen({super.key});
 
@@ -19,8 +18,7 @@ class AddTagsScreen extends StatefulWidget {
 }
 
 class _AddTagsScreenState extends State<AddTagsScreen> {
-  final TextEditingController addTagsController = TextEditingController();
-  AddTagsViewModel? addTagsViewModel;
+  late AddTagsViewModel addTagsViewModel;
 
   @override
   void initState() {
@@ -44,17 +42,17 @@ class _AddTagsScreenState extends State<AddTagsScreen> {
               children: <Widget>[
                 SizedBox(height: 40.h),
                 CustomTextField.customTextField(
-                  textEditingController: addTagsViewModel!.addTagsController,
+                  textEditingController: addTagsViewModel.addTagsController,
                   hintText: "Title",
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField.customTextField(
-                  textEditingController: addTagsViewModel!.addTagsController,
+                  textEditingController: addTagsViewModel.addTagsController,
                   hintText: "Slug",
                 ),
                 SizedBox(height: 20.h),
                 ElevatedButton(
-                  onPressed: () => addTagsViewModel!.addNewTags(context),
+                  onPressed: () => addTagsViewModel.addNewTags(context),
                   child: const Text("Add New Tag"),
                 ),
               ],

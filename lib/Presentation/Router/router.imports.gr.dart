@@ -9,14 +9,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:bloc_learning/Data/Models/home.model.dart' as _i12;
+import 'package:bloc_learning/Data/Models/home.model.dart' as _i13;
+import 'package:bloc_learning/Data/Models/tags.model.dart' as _i11;
 import 'package:bloc_learning/Presentation/Screens/authScreen/auth.screen.dart'
     as _i2;
 import 'package:bloc_learning/Presentation/Screens/generalScreen/bottomNavigationScreen/bottom.navi.bar.screen.dart'
     as _i3;
 import 'package:bloc_learning/Presentation/Screens/generalScreen/homeScreen/home.details.dart'
     as _i4;
-import 'package:bloc_learning/Presentation/Screens/generalScreen/tagsScreen/add.tags.dart'
+import 'package:bloc_learning/Presentation/Screens/generalScreen/tagsScreen/add.tags.screen.dart'
     as _i1;
 import 'package:bloc_learning/Presentation/Screens/generalScreen/tagsScreen/tags.screen.dart'
     as _i9;
@@ -28,7 +29,7 @@ import 'package:bloc_learning/Presentation/Screens/registrationScreen/registrati
     as _i7;
 import 'package:bloc_learning/Presentation/Screens/splashScreen/splash.imports.dart'
     as _i8;
-import 'package:flutter/material.dart' as _i11;
+import 'package:flutter/material.dart' as _i12;
 
 abstract class $AppRouter extends _i10.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -36,11 +37,9 @@ abstract class $AppRouter extends _i10.RootStackRouter {
   @override
   final Map<String, _i10.PageFactory> pagesMap = {
     AddTagsScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<AddTagsScreenRouteArgs>(
-          orElse: () => const AddTagsScreenRouteArgs());
-      return _i10.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<_i11.TagsModel>(
         routeData: routeData,
-        child: _i1.AddTagsScreen(key: args.key),
+        child: const _i1.AddTagsScreen(),
       );
     },
     AuthScreenRoute.name: (routeData) {
@@ -101,31 +100,16 @@ abstract class $AppRouter extends _i10.RootStackRouter {
 
 /// generated route for
 /// [_i1.AddTagsScreen]
-class AddTagsScreenRoute extends _i10.PageRouteInfo<AddTagsScreenRouteArgs> {
-  AddTagsScreenRoute({
-    dynamic key,
-    List<_i10.PageRouteInfo>? children,
-  }) : super(
+class AddTagsScreenRoute extends _i10.PageRouteInfo<void> {
+  const AddTagsScreenRoute({List<_i10.PageRouteInfo>? children})
+      : super(
           AddTagsScreenRoute.name,
-          args: AddTagsScreenRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'AddTagsScreenRoute';
 
-  static const _i10.PageInfo<AddTagsScreenRouteArgs> page =
-      _i10.PageInfo<AddTagsScreenRouteArgs>(name);
-}
-
-class AddTagsScreenRouteArgs {
-  const AddTagsScreenRouteArgs({this.key});
-
-  final dynamic key;
-
-  @override
-  String toString() {
-    return 'AddTagsScreenRouteArgs{key: $key}';
-  }
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
@@ -160,8 +144,8 @@ class BottomNavigationBarRoute extends _i10.PageRouteInfo<void> {
 /// [_i4.HomeDetails]
 class HomeDetailsRoute extends _i10.PageRouteInfo<HomeDetailsRouteArgs> {
   HomeDetailsRoute({
-    _i11.Key? key,
-    required _i12.Post post,
+    _i12.Key? key,
+    required _i13.Post post,
     required String imagePath,
     List<_i10.PageRouteInfo>? children,
   }) : super(
@@ -187,9 +171,9 @@ class HomeDetailsRouteArgs {
     required this.imagePath,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
-  final _i12.Post post;
+  final _i13.Post post;
 
   final String imagePath;
 
