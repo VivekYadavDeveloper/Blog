@@ -15,6 +15,7 @@ class TagsViewModel {
   final VelocityBloc<TagsModel> tagsModelBloc =
       VelocityBloc<TagsModel>(TagsModel());
 
+  ///************* FETCH ALL TAGS FUNCTION **************
   fetchAllTags() async {
     var tagsData = await repository.tagsRepo.getAllTags();
     if (tagsData.status == 1) {
