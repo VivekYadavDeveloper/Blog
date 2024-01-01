@@ -63,7 +63,7 @@ class _TagsScreenState extends State<TagsScreen> {
                           child: Row(
                             children: <Widget>[
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () => tagsViewModel.gotoUpdateTags(context,tagsData),
                                 icon: const Icon(Icons.edit_note),
                               ),
                               IconButton(

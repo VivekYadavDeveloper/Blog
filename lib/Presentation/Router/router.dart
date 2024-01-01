@@ -19,5 +19,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: BottomNavigationBarRoute.page),
         AutoRoute(page: HomeDetailsRoute.page),
         AutoRoute(page: AddTagsScreenRoute.page),
+        AutoRoute(page: UpdateTagsScreenRoute.page),
       ];
 }

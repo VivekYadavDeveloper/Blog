@@ -5,6 +5,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../Models/add.tags.model.dart';
 import '../Models/delete.tags.model.dart';
+import '../Models/updates.tags.model.dart';
 
 class TagsRepo extends ApiClient {
   TagsRepo();
@@ -54,6 +55,31 @@ class TagsRepo extends ApiClient {
       AddTagsModel();
     }
     return AddTagsModel();
+  }
+
+  ///*************************** UPDATE TAGS ******************
+  Future<UpdateTagsModel> updateTags(
+    String title,
+    String slug,
+    String id,
+  ) async {
+    Map body = {"id": id, "title": title, "slug": slug};
+    try {
+      final response = await postRequest(
+          path: ApiEndPoint.updateTags, body: body, isTokenRequired: true);
+
+      if (response.statusCode == 200) {
+        final resData = UpdateTagsModel.fromJson(response.data);
+        Vx.log(response);
+        return resData;
+      } else {
+        UpdateTagsModel();
+      }
+    } on Exception catch (e) {
+      Vx.log(e);
+      UpdateTagsModel();
+    }
+    return UpdateTagsModel();
   }
 
   ///*************************** DELETE TAGS ******************

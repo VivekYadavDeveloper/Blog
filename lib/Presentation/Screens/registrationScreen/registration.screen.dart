@@ -99,7 +99,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                                 SizedBox(height: 25.h),
                                 CustomTextField.customTextField(
-                                  textEditingController: userConfiPassController,
+                                  textEditingController:
+                                      userConfiPassController,
                                   hintText: "Confirm Password",
                                   validator: (val) =>
                                       val!.isEmpty ? 'Enter a password' : null,
